@@ -1,0 +1,23 @@
+package password_test
+
+import (
+	"github.com/stretchr/testify/assert"
+	"oauth2-gs/util/password"
+	"testing"
+)
+
+func TestVerifyPassword(t *testing.T) {
+	// Test valid passwords
+	assert.Nil(t, password.VerifyPassword(
+		"$2a$10$CUoGytf1pR7CC6Y043gt/.vFJUV4IRqvH5R6F0VfITP8s2TqrQ.4e",
+		"test_secret",
+	))
+
+	assert.Nil(t, password.VerifyPassword(
+		"$2a$10$4J4t9xuWhOKhfjN0bOKNReS9sL3BVSN9zxIr2.VaWWQfRBWh1dQIS",
+		"test_password",
+	))
+
+	// Test invalid password
+	assert.NotNil(t, password.VerifyPassword("bogus", "password"))
+}
